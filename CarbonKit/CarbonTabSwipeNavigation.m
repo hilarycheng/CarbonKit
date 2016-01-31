@@ -35,6 +35,32 @@ UIPageViewControllerDataSource, UIScrollViewDelegate, UIToolbarDelegate>
 
 @implementation CarbonTabSwipeNavigation
 
+- (void)insertIntoRootViewControllerWithoutBottomGuide:(UIViewController *)rootViewController {
+	
+	[self willMoveToParentViewController:rootViewController];
+	[rootViewController addChildViewController:self];
+	[rootViewController.view addSubview:self.view];
+	[self didMoveToParentViewController:rootViewController];
+	
+	self.view.translatesAutoresizingMaskIntoConstraints = NO;
+	id views = @{@"carbonTabSwipe": self.view,
+				 @"topLayoutGuide": rootViewController.topLayoutGuide,
+				 @"bottomLayoutGuide": rootViewController.bottomLayoutGuide};
+	
+	[rootViewController.view addConstraints:
+	 [NSLayoutConstraint
+	  constraintsWithVisualFormat:@"V:[topLayoutGuide][carbonTabSwipe]|"
+	  options:0
+	  metrics:nil
+	  views:views]];
+	[rootViewController.view addConstraints:
+	 [NSLayoutConstraint
+	  constraintsWithVisualFormat:@"H:|[carbonTabSwipe]|"
+	  options:0
+	  metrics:nil
+	  views:views]];
+}
+
 - (void)insertIntoRootViewController:(UIViewController *)rootViewController {
 	
 	[self willMoveToParentViewController:rootViewController];

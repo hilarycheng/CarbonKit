@@ -84,6 +84,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSLayoutConstraint *toolbarHeight;
 
 
+- (void)insertIntoRootViewControllerWithoutBottomGuide:(UIViewController *)rootViewController;
+
 /**
  *  Insert instance into rootViewController and create constraint using
  *  topLayoutGuide, bottomLayoutGuide, leading, trailing equal to 0.
